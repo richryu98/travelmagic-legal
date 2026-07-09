@@ -1,394 +1,69 @@
+<!doctype html><html lang="ko"><head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Travelmagic — App Store screenshots</title>
 <style>
-  :root{
-    --bg:#FBFAF7; --surface:#FFFFFF; --ink:#1C1B19; --muted:#78756E; --faint:#B4B0A6;
-    --line:#EAE7DF; --accent:#B65A34; --accentBg:#F4E7DF; --accentInk:#8C3F20; --warn:#9A6B12;
-    --ground:#211A15; --ground2:#2A211A; --cap:#F3ECE0; --capClay:#E4946A; --capMute:#B9A996;
+  :root{--ground:#1E1712;--ground2:#2C2119;--cap:#F5EFE4;--capClay:#E1935F;--capMute:#BAAA98;
     --serif:Georgia,"AppleMyungjo","Nanum Myeongjo",serif;
-    --sans:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0}
-  body{
-    background:
-      radial-gradient(120% 80% at 50% -10%, var(--ground2), var(--ground) 60%);
-    color:var(--cap); font-family:var(--sans); min-height:100vh;
-  }
-  .page{max-width:1180px; margin:0 auto; padding:30px 22px 60px}
-  header{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:6px}
-  .wm{font-family:var(--serif); font-size:23px; letter-spacing:.3px; color:var(--cap)}
-  .wm b{color:var(--capClay); font-weight:400}
-  .sub{font-size:12.5px; color:var(--capMute); letter-spacing:.4px; text-transform:uppercase}
-  .head-l{display:flex; flex-direction:column; gap:5px}
-  .langtog{display:inline-flex; border:1px solid rgba(243,236,224,.24); border-radius:11px; overflow:hidden; background:rgba(0,0,0,.18)}
-  .langtog button{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:var(--capMute);font:inherit;font-size:13px;font-weight:600;padding:8px 16px;cursor:pointer;letter-spacing:.3px}
-  .langtog button.on{background:var(--accent); color:#fff}
-  .langtog button:focus-visible{outline:2px solid var(--capClay); outline-offset:-2px}
-  .note{font-size:12.5px; color:var(--capMute); margin:14px 2px 20px; line-height:1.6; max-width:70ch}
-  .note b{color:var(--cap); font-weight:600}
-
-  /* horizontal strip of app-store canvases */
-  .strip{display:flex; gap:22px; overflow-x:auto; padding:6px 2px 22px; scroll-snap-type:x mandatory}
-  .strip::-webkit-scrollbar{height:10px}
-  .strip::-webkit-scrollbar-thumb{background:rgba(243,236,224,.18); border-radius:20px}
-  .shot{
-    flex:0 0 auto; scroll-snap-align:center;
-    width:296px; aspect-ratio:1290/2796; border-radius:26px;
-    background:linear-gradient(180deg,var(--ground2),var(--ground));
-    border:1px solid rgba(243,236,224,.10);
-    padding:26px 20px 0; display:flex; flex-direction:column; align-items:center;
-    overflow:hidden; position:relative;
-  }
-  .cap{font-family:var(--serif); font-size:20px; line-height:1.3; text-align:center; color:var(--cap); text-wrap:balance; margin:2px 0 16px; min-height:70px}
-  .cap .hl{color:var(--capClay)}
-  .idx{position:absolute; top:12px; left:14px; font-size:11px; color:var(--capMute); font-variant-numeric:tabular-nums; letter-spacing:.5px}
-
-  /* device */
-  .phone{
-    width:250px; flex:1 1 auto; background:#0b0a09; border-radius:34px 34px 0 0;
-    padding:8px 8px 0; box-shadow:0 18px 40px -18px rgba(0,0,0,.7);
-    border:1px solid #35302b; border-bottom:0;
-  }
-  .screen{
-    background:var(--bg); height:100%; border-radius:27px 27px 0 0; overflow:hidden;
-    position:relative; display:flex; flex-direction:column;
-  }
-  .island{position:absolute; top:9px; left:50%; transform:translateX(-50%); width:66px; height:19px; background:#0b0a09; border-radius:12px; z-index:5}
-  .status{display:flex; align-items:center; justify-content:space-between; padding:9px 17px 2px; font-size:11px; font-weight:600; color:var(--ink)}
-  .status .r{display:flex; align-items:center; gap:4px}
-  .status .r svg{display:block}
-  .app{flex:1; overflow:hidden; padding-top:2px}
-
-  /* ---- app UI (faithful to the RN theme) ---- */
-  .ph{padding-left:16px; padding-right:16px}
-  .hrow{display:flex; align-items:center; justify-content:space-between; padding:6px 16px 0}
-  .tag{display:flex; align-items:center; gap:5px; min-width:0}
-  .kick{font-size:11px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-  .hbtns{display:flex; gap:3px; flex:0 0 auto}
-  .hbtns .ib{padding:5px; color:var(--muted)}
-  .chips{display:flex; gap:7px; padding:12px 16px 0; overflow:hidden}
-  .chip{background:var(--surface); border:1px solid var(--line); border-radius:11px; padding:6px 11px; text-align:center; flex:0 0 auto}
-  .chip .cd{font-size:12px; font-weight:600; color:var(--ink)}
-  .chip .ct{font-size:9px; color:var(--muted); margin-top:1px}
-  .chip.on{background:var(--ink); border-color:var(--ink)}
-  .chip.on .cd{color:#fff}.chip.on .ct{color:#D8D4CB}
-  .voice{font-family:var(--serif); font-size:17px; line-height:1.45; color:var(--ink); padding:14px 16px 0}
-  .replan{display:flex; align-items:center; justify-content:center; gap:6px; border:1px solid var(--accent); border-radius:10px; padding:9px; margin:12px 16px 0; color:var(--accent); font-size:12px}
-  .tl{padding:18px 16px 0}
-  .r{display:flex}
-  .r .t{width:40px; text-align:right; padding-right:11px; font-size:11px; color:var(--muted); padding-top:1px; flex:0 0 auto; font-variant-numeric:tabular-nums}
-  .rail{flex:1; border-left:1px solid var(--line); padding-left:16px; padding-bottom:18px; position:relative; min-width:0}
-  .rail.last{border-color:transparent; padding-bottom:2px}
-  .dot{position:absolute; left:-5px; top:3px; width:9px; height:9px; border-radius:50%; border:2px solid var(--bg)}
-  .ttl{font-size:14px; color:var(--ink); font-weight:500; display:flex; align-items:center; gap:5px}
-  .subn{font-size:10.5px; color:var(--muted); margin-top:3px}
-  .brow{display:flex; align-items:center; gap:8px}
-  .badge{display:flex; align-items:center; gap:3px; background:var(--accentBg); padding:2px 7px; border-radius:20px; color:var(--accentInk); font-size:10px; flex:0 0 auto}
-  .gttl{font-size:12px; font-weight:600; color:var(--warn)}
-  .grsn{font-size:10.5px; color:var(--muted); margin:3px 0 9px}
-  .sugg{background:var(--accentBg); border-radius:12px; padding:11px}
-  .sugg .sh{display:flex; gap:8px; align-items:flex-start}
-  .sugg .st{font-size:12px; font-weight:600; color:var(--accentInk); line-height:1.35}
-  .sugg .sm{font-size:10px; color:var(--muted); margin-top:2px}
-  .sbtns{display:flex; gap:7px; margin-top:9px}
-  .fill{flex:1; display:flex; align-items:center; justify-content:center; gap:4px; border:1px solid var(--accent); border-radius:9px; padding:7px; color:var(--accentInk); font-size:11px}
-  .oth{border:1px solid var(--line); border-radius:9px; padding:7px 13px; color:var(--muted); font-size:11px}
-  .add{display:flex; align-items:center; justify-content:center; gap:6px; margin:2px 16px 0; border:1px solid var(--line); border-radius:10px; padding:9px; color:var(--muted); font-size:12px}
-  .thumb{width:100%; height:104px; border-radius:9px; margin-top:8px; overflow:hidden; background:var(--accentBg)}
-  .thumb svg{display:block; width:100%; height:100%}
-
-  /* setup */
-  .stophead{display:flex; align-items:center; justify-content:space-between; padding:8px 16px 0}
-  .inlangtog{display:inline-flex; border:1px solid var(--line); border-radius:8px; overflow:hidden}
-  .inlangtog span{font-size:11px; font-weight:600; color:var(--muted); padding:4px 9px}
-  .inlangtog span.on{background:var(--accentBg); color:var(--accentInk)}
-  .lbl{font-size:11px; color:var(--muted); margin:15px 16px 6px; display:flex; gap:6px; align-items:baseline}
-  .lbl .hint{color:var(--faint); font-size:10px}
-  .field{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:10px 12px; margin:0 16px; font-size:14px; color:var(--ink)}
-  .field.ph2{color:var(--faint)}
-  .dtrow{display:flex; gap:7px; margin:0 16px}
-  .dtrow .field{margin:0; flex:1}
-  .dtrow .tm{flex:0 0 74px; text-align:center}
-  .tog2{display:flex; align-items:center; justify-content:space-between; margin:7px 16px 0}
-  .tog2 .tl2{font-size:11px; color:var(--faint)}
-  .switch{width:34px; height:20px; border-radius:20px; background:var(--line); position:relative}
-  .switch i{position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#fff}
-  .prev{margin:13px 16px 0; font-size:12px; color:var(--accentInk); font-weight:500}
-  .cta{margin:20px 16px 0; background:var(--accent); border-radius:12px; padding:13px; text-align:center; color:#fff; font-size:14px; font-weight:500}
-  .frow{display:flex; gap:7px; margin:0 16px}
-  .frow .field{margin:0; flex:1}
-
-  /* packing */
-  .grp{margin:0 16px 15px}
-  .gt{font-size:11px; color:var(--muted); margin:14px 0 7px}
-  .pk{display:flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:10px 12px; margin-bottom:6px}
-  .cbx{width:19px; height:19px; border-radius:6px; border:1.5px solid var(--line); flex:0 0 auto; display:flex; align-items:center; justify-content:center}
-  .cbx.on{background:var(--accent); border-color:var(--accent); color:#fff}
-  .pl{font-size:13px; color:var(--ink)}
-  .pl.done{color:var(--faint); text-decoration:line-through}
-  .dates{font-size:11px; color:var(--muted); text-align:center; margin-top:2px}
-  .back{width:26px; color:var(--muted)}
-  .kickc{flex:1; font-size:11px; color:var(--muted); text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-  @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
-</style>
-
+    --sans:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",Roboto,sans-serif;}
+  *{box-sizing:border-box;margin:0}
+  body{background:radial-gradient(130% 80% at 50% -8%,var(--ground2),var(--ground) 62%);
+    color:var(--cap);font-family:var(--sans);min-height:100vh}
+  .page{max-width:1200px;margin:0 auto;padding:34px 20px 70px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+  .wm{font-family:var(--serif);font-size:25px;letter-spacing:.3px}
+  .wm b{color:var(--capClay);font-weight:400}
+  .sub{font-size:12.5px;color:var(--capMute);letter-spacing:.4px;text-transform:uppercase;margin-top:5px}
+  .langtog{display:inline-flex;border:1px solid rgba(245,239,227,.24);border-radius:11px;overflow:hidden;background:rgba(0,0,0,.2)}
+  .langtog button{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:var(--capMute);
+    font:inherit;font-size:13px;font-weight:600;padding:9px 18px;cursor:pointer}
+  .langtog button.on{background:var(--capClay);color:#211a15}
+  .note{font-size:12.5px;color:var(--capMute);margin:14px 2px 24px;line-height:1.6;max-width:74ch}
+  .note b{color:var(--cap)}
+  .strip{display:flex;gap:20px;overflow-x:auto;padding:4px 2px 24px;scroll-snap-type:x mandatory}
+  .strip::-webkit-scrollbar{height:9px}
+  .strip::-webkit-scrollbar-thumb{background:rgba(245,239,227,.18);border-radius:20px}
+  .strip img{flex:0 0 auto;width:300px;max-width:78vw;border-radius:18px;scroll-snap-align:center;
+    box-shadow:0 24px 60px -26px rgba(0,0,0,.7)}
+  .meta{font-size:12px;color:var(--capMute);margin-top:8px;text-align:center;line-height:1.5}
+  .meta b{color:var(--cap)}
+</style></head><body>
 <div class="page">
   <header>
-    <div class="head-l">
-      <div class="wm">Travel<b>magic</b></div>
-      <div class="sub" id="subttl">App Store screenshots · preview</div>
-    </div>
+    <div><div class="wm">Travel<b>magic</b></div><div class="sub" id="sub">App Store screenshots · 1320×2868</div></div>
     <div class="langtog" role="group" aria-label="Language">
-      <button type="button" data-l="ko">한국어</button>
+      <button type="button" data-l="ko" class="on">한국어</button>
       <button type="button" data-l="en">English</button>
     </div>
   </header>
   <p class="note" id="note"></p>
   <div class="strip" id="strip"></div>
+  <p class="meta" id="foot"></p>
 </div>
-
 <script>
-/* ---------- inline icons (lucide-ish) ---------- */
-function svg(inner,sz,sw){return '<svg width="'+(sz||14)+'" height="'+(sz||14)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="'+(sw||2)+'" stroke-linecap="round" stroke-linejoin="round">'+inner+'</svg>';}
-var IC={
-  plane:function(s){return svg('<path d="M17.8 19.2 16 11l3.5-3.5a2 2 0 0 0-2.8-2.8L13 8 4.8 6.2 3 8l7 3-3 3-3-1-1 2 5 3 3 5 2-1-1-3 3-3 3 7 2-1.8Z"/>',s)},
-  train:function(s){return svg('<rect x="4" y="3" width="16" height="14" rx="2"/><path d="M4 11h16M12 3v8M8 19l-2 3M16 19l2 3"/><circle cx="8.5" cy="14.5" r=".6"/><circle cx="15.5" cy="14.5" r=".6"/>',s)},
-  lock:function(s){return svg('<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',s)},
-  spark:function(s){return svg('<path d="M12 3l1.6 4.9L18.5 9.5 13.6 11 12 16l-1.6-5L5.5 9.5l4.9-1.6z"/>',s)},
-  pencil:function(s){return svg('<path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>',s)},
-  plus:function(s){return svg('<path d="M12 5v14M5 12h14"/>',s)},
-  refresh:function(s){return svg('<path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"/>',s)},
-  check:function(s,sw){return svg('<path d="M20 6 9 17l-5-5"/>',s,sw||3)},
-  chev:function(s){return svg('<path d="m15 18-6-6 6-6"/>',s)},
-  hist:function(s){return svg('<path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5M12 7v5l3 2"/>',s)},
-  book:function(s){return svg('<path d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>',s)},
-  bag:function(s){return svg('<path d="M6 8h12l1 12H5zM9 8V6a3 3 0 0 1 6 0v2"/>',s)},
-};
-/* status-bar glyphs */
-var SB='<svg width="16" height="11" viewBox="0 0 18 12" fill="#1C1B19"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="4.5" y="4.5" width="3" height="7.5" rx="1"/><rect x="9" y="2" width="3" height="10" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1" opacity=".3"/></svg>'
-+'<svg width="16" height="11" viewBox="0 0 20 14" fill="none" stroke="#1C1B19" stroke-width="1.6"><path d="M10 4.5a8 8 0 0 1 6 2.5M10 4.5a8 8 0 0 0-6 2.5" /><path d="M10 8.5a4 4 0 0 1 3 1.3M10 8.5a4 4 0 0 0-3 1.3"/><circle cx="10" cy="12" r="1" fill="#1C1B19" stroke="none"/></svg>'
-+'<svg width="22" height="11" viewBox="0 0 26 13" fill="none"><rect x="1" y="1" width="21" height="11" rx="3" stroke="#1C1B19" stroke-opacity=".5"/><rect x="3" y="3" width="16" height="7" rx="1.5" fill="#1C1B19"/><rect x="23" y="4.5" width="2" height="4" rx="1" fill="#1C1B19" opacity=".5"/></svg>';
-
-/* photo (Dotonbori-ish canal at night) */
-var PHOTO='<svg viewBox="0 0 300 150" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">'
-+'<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2a3f"/><stop offset="1" stop-color="#7a4a3a"/></linearGradient>'
-+'<linearGradient id="wat" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#241a2a"/><stop offset="1" stop-color="#12101a"/></linearGradient></defs>'
-+'<rect width="300" height="92" fill="url(#sky)"/><rect y="92" width="300" height="58" fill="url(#wat)"/>'
-+'<rect x="8" y="20" width="46" height="66" fill="#20161d"/><rect x="60" y="10" width="52" height="76" fill="#2a1c22"/><rect x="120" y="28" width="60" height="58" fill="#1d151b"/><rect x="188" y="14" width="50" height="72" fill="#281a20"/><rect x="244" y="24" width="48" height="62" fill="#20161d"/>'
-+'<rect x="66" y="20" width="40" height="12" rx="2" fill="#e05a3a"/><rect x="70" y="40" width="30" height="9" rx="2" fill="#e8b24a"/><rect x="14" y="34" width="30" height="10" rx="2" fill="#4aa3c8"/><rect x="128" y="40" width="42" height="11" rx="2" fill="#d84a6a"/><rect x="196" y="26" width="34" height="10" rx="2" fill="#e8b24a"/><rect x="250" y="36" width="30" height="9" rx="2" fill="#5ac88a"/>'
-+'<g opacity=".5"><rect x="66" y="96" width="40" height="10" rx="2" fill="#e05a3a"/><rect x="128" y="100" width="42" height="9" rx="2" fill="#d84a6a"/><rect x="196" y="98" width="34" height="9" rx="2" fill="#e8b24a"/></g>'
-+'<g opacity=".28" fill="#fff"><rect x="66" y="112" width="40" height="30"/><rect x="128" y="112" width="42" height="30"/><rect x="196" y="112" width="34" height="30"/></g>'
-+'</svg>';
-
-function dot(c){return '<span class="dot" style="background:'+c+'"></span>';}
-function ic(name,s,col){return '<span style="color:'+(col||'var(--muted)')+';display:inline-flex">'+IC[name](s||14)+'</span>';}
-
-/* ---------- screen renderers ---------- */
-function statusbar(){return '<div class="status"><span>9:41</span><span class="r">'+SB+'</span></div><div class="island"></div>';}
-
-function homeScreen(d){
-  var items=d.items.map(function(it,i){
-    var last=i===d.items.length-1?' last':'';
-    var col=it.kind==='anchor'?'var(--accent)':it.kind==='gap'?'var(--warn)':'var(--faint)';
-    var body='';
-    if(it.kind==='anchor'){
-      body='<div class="brow"><div style="flex:1;min-width:0"><div class="ttl">'+ic(it.icon,13,'var(--accent)')+'<span>'+it.title+'</span></div>'+(it.sub?'<div class="subn">'+it.sub+'</div>':'')+'</div>'
-      +'<span class="badge">'+ic('lock',10,'var(--accentInk)')+it.badge+'</span></div>';
-    } else if(it.kind==='soft'){
-      body='<div class="ttl">'+it.title+'</div>'+(it.sub?'<div class="subn">'+it.sub+'</div>':'')+(it.photo?'<div class="thumb">'+PHOTO+'</div>':'');
-    } else {
-      body='<div class="gttl">'+it.dur+'</div><div class="grsn">'+it.reason+'</div>'
-      +'<div class="sugg"><div class="sh">'+ic('spark',17,'var(--accent)')+'<div style="flex:1;min-width:0"><div class="st">'+it.sTitle+'</div><div class="sm">'+it.sMeta+'</div></div></div>'
-      +'<div class="sbtns"><span class="fill">'+ic('plus',13,'var(--accentInk)')+it.fill+'</span><span class="oth">'+it.other+'</span></div></div>';
-    }
-    return '<div class="r"><span class="t">'+it.time+'</span><div class="rail'+last+'">'+dot(col)+body+'</div></div>';
-  }).join('');
-  var chips=d.chips.map(function(c){return '<div class="chip'+(c.on?' on':'')+'"><div class="cd">'+c.d+'</div><div class="ct">'+c.date+(c.today?d.todayMark:'')+'</div></div>';}).join('');
-  return statusbar()
-  +'<div class="app"><div class="hrow"><div class="tag"><span class="kick">'+d.tag+'</span>'+ic('pencil',12,'var(--faint)')+'</div>'
-  +'<div class="hbtns"><span class="ib">'+IC.hist(18)+'</span><span class="ib">'+IC.book(18)+'</span><span class="ib">'+IC.bag(18)+'</span></div></div>'
-  +'<div class="chips">'+chips+'</div>'
-  +'<div class="voice">'+d.voice+'</div>'
-  +'<div class="replan">'+ic('refresh',14,'var(--accent)')+'<span>'+d.replan+'</span></div>'
-  +'<div class="tl">'+items+'</div>'
-  +'<div class="add">'+ic('plus',14,'var(--muted)')+'<span>'+d.add+'</span></div></div>';
-}
-
-function setupScreen(d){
-  return statusbar()
-  +'<div class="app"><div class="stophead"><span class="back"></span><span class="kick">'+d.kicker+'</span>'
-  +'<span class="inlangtog"><span class="'+(d.lang==='ko'?'on':'')+'">한</span><span class="'+(d.lang==='en'?'on':'')+'">EN</span></span></div>'
-  +'<div class="voice">'+d.voice+'</div>'
-  +'<div class="lbl">'+d.cityL+' <span class="hint">'+d.cityH+'</span></div><div class="field">'+d.city+'</div>'
-  +'<div class="lbl">'+d.arrL+'</div><div class="dtrow"><div class="field">'+d.arrD+'</div><div class="field tm">'+d.arrT+'</div></div>'
-  +'<div class="tog2"><span class="tl2">'+d.timeUnknown+'</span><span class="switch"><i></i></span></div>'
-  +'<div class="lbl">'+d.depL+'</div><div class="dtrow"><div class="field">'+d.depD+'</div><div class="field tm">'+d.depT+'</div></div>'
-  +'<div class="prev">'+d.prev+'</div>'
-  +'<div class="lbl">'+d.flL+'</div><div class="frow"><div class="field ph2">'+d.out+'</div><div class="field ph2">'+d.ret+'</div></div>'
-  +'<div class="cta">'+d.cta+'</div></div>';
-}
-
-function packingScreen(d){
-  var grps=d.groups.map(function(g){
-    var rows=g.items.map(function(it){
-      return '<div class="pk"><span class="cbx'+(it.on?' on':'')+'">'+(it.on?IC.check(12,3):'')+'</span><span class="pl'+(it.on?' done':'')+'">'+it.label+'</span></div>';
+  var NAMES=['01-today','02-gap','03-setup','04-packing','05-journal'];
+  var TXT={
+    ko:{sub:'앱스토어 스크린샷 · 1320×2868',
+      note:'실제 앱 화면을 코드의 정확한 값(여백 22·폰트 크기·명조 서체)으로 재현했어요. 아이폰 6.9″ 마스터 해상도 <b>1320×2868</b>(알파 없음) — App Store가 작은 기기로 자동 축소합니다. 위 토글로 <b>한국어 / English</b> 완전 분리 확인.',
+      foot:'업로드 순서: ' + NAMES.join(' → ')},
+    en:{sub:'App Store screenshots · 1320×2868',
+      note:'The real app screens, reproduced from the code’s exact values (22px padding, font sizes, myeongjo serif). iPhone 6.9″ master <b>1320×2868</b> (no alpha) — App Store auto-scales it down. Toggle above to verify <b>한국어 / English</b> are fully separated.',
+      foot:'Upload order: ' + NAMES.join(' → ')}
+  };
+  var lang='ko';
+  function render(){
+    var t=TXT[lang]; document.documentElement.lang=lang;
+    document.getElementById('sub').textContent=t.sub;
+    document.getElementById('note').innerHTML=t.note;
+    document.getElementById('foot').innerHTML=t.foot;
+    document.getElementById('strip').innerHTML=NAMES.map(function(n,i){
+      return '<img src="shots/'+lang+'/'+n+'.png" alt="'+n+'" loading="lazy" width="1320" height="2868">';
     }).join('');
-    return '<div class="grp"><div class="gt">'+g.cat+'</div>'+rows+'</div>';
-  }).join('');
-  return statusbar()
-  +'<div class="app"><div class="hrow" style="padding-top:8px"><span class="back">'+IC.chev(19)+'</span><span class="kickc">'+d.kicker+'</span><span class="back"></span></div>'
-  +'<div class="voice">'+d.voice+'</div><div style="height:8px"></div>'+grps
-  +'<div class="replan" style="margin-top:2px">'+ic('refresh',13,'var(--accent)')+'<span>'+d.regen+'</span></div></div>';
-}
-
-function recordScreen(d){
-  var chips=d.chips.map(function(c){return '<div class="chip'+(c.on?' on':'')+'"><div class="cd">'+c.d+'</div><div class="ct">'+c.date+'</div></div>';}).join('');
-  var items=d.items.map(function(it,i){
-    var last=i===d.items.length-1?' last':'';
-    var col=it.kind==='anchor'?'var(--accent)':'var(--faint)';
-    var body='';
-    if(it.kind==='anchor'){body='<div class="brow"><div style="flex:1;min-width:0"><div class="ttl">'+ic(it.icon,13,'var(--accent)')+'<span>'+it.title+'</span></div>'+(it.sub?'<div class="subn">'+it.sub+'</div>':'')+'</div>'+ic('lock',11,'var(--accentInk)')+'</div>';}
-    else if(it.kind==='soft'){body='<div class="ttl">'+it.title+'</div>'+(it.sub?'<div class="subn">'+it.sub+'</div>':'')+(it.photo?'<div class="thumb">'+PHOTO+'</div>':'');}
-    else {body='<div style="font-size:11px;color:var(--muted)">'+it.text+'</div>';}
-    return '<div class="r"><span class="t">'+it.time+'</span><div class="rail'+last+'">'+dot(col)+body+'</div></div>';
-  }).join('');
-  return statusbar()
-  +'<div class="app"><div class="hrow" style="padding-top:8px"><span class="back">'+IC.chev(19)+'</span><span class="kickc">'+d.kicker+'</span><span class="back"></span></div>'
-  +'<div class="dates">'+d.dates+'</div>'
-  +'<div class="chips">'+chips+'</div>'
-  +'<div class="voice">'+d.voice+'</div>'
-  +'<div class="tl">'+items+'</div></div>';
-}
-
-var REND={home:homeScreen,setup:setupScreen,packing:packingScreen,record:recordScreen};
-
-/* ---------- content (ko / en) ---------- */
-var DATA={
-  ko:{
-    sub:"앱스토어 스크린샷 · 미리보기",
-    note:"실제 화면을 코드에서 그대로 재현했어요 — 색·폰트·레이아웃 동일. 위 <b>한국어 / English</b> 토글로 언어를 완전히 분리해 확인하세요. 실제 업로드용 고해상도(1290×2796) 출력은 승인 후 진행합니다.",
-    shots:[
-      {cap:'도착하는 순간, <span class="hl">하루가 시작</span>돼요',screen:'home',d:{
-        tag:'오사카 · 혼자 · 2일차',todayMark:' · 오늘',
-        chips:[{d:'1일차',date:'7/12 (토)'},{d:'2일차',date:'7/13 (일)',on:true,today:true},{d:'3일차',date:'7/14 (월)'}],
-        voice:'천천히 걸어도 좋은 날이에요. 마음에 든 골목에서 오래 머물러요.',
-        replan:'하루가 밀렸어요? 다시 짜기',
-        items:[
-          {time:'09:30',kind:'anchor',icon:'plane',title:'오사카 도착',badge:'고정'},
-          {time:'11:00',kind:'soft',title:'도톤보리 아침 산책',sub:'사람 적은 아침이 좋아요'},
-          {time:'13:00',kind:'soft',title:'이치란 라멘 · 혼밥 카운터'},
-          {time:'15:00',kind:'gap',dur:'빈 시간 2시간',reason:'오후가 비어 있어요 · 지금 채울까요?',sTitle:'근처 카페에서 쉬기 · 도보 5분',sMeta:'혼자 앉기 좋은 자리',fill:'일정에 넣기',other:'다른 거'},
-          {time:'18:30',kind:'soft',title:'우메다 스카이빌딩 야경'}
-        ],add:'직접 추가'}},
-      {cap:'기차까지 2시간 40분,<br><span class="hl">지금 근처에</span> 갈 만한 곳',screen:'home',d:{
-        tag:'오사카 · 혼자 · 3일차',todayMark:' · 오늘',
-        chips:[{d:'1일차',date:'7/12 (토)'},{d:'2일차',date:'7/13 (일)'},{d:'3일차',date:'7/14 (월)',on:true,today:true}],
-        voice:'마지막 날, 서두르지 않아도 돼요.',
-        replan:'하루가 밀렸어요? 다시 짜기',
-        items:[
-          {time:'10:30',kind:'soft',title:'나카노시마 강변 산책'},
-          {time:'12:00',kind:'gap',dur:'빈 시간 2시간 40분',reason:'기차까지 2시간 40분 · 지금 채울까요?',sTitle:'구로몬 시장 먹거리 · 도보 8분',sMeta:'가볍게 한 바퀴, 혼자도 편해요',fill:'일정에 넣기',other:'다른 거'},
-          {time:'15:40',kind:'anchor',icon:'train',title:'간사이공항 특급 하루카',badge:'고정'}
-        ],add:'직접 추가'}},
-      {cap:'<span class="hl">도착 시각만</span> 알려주면 돼요',screen:'setup',d:{
-        lang:'ko',kicker:'혼자 떠나는 여행',voice:'어디로, 언제 가요? 나머지는 같이 짜요.',
-        cityL:'도시',cityH:'국내든 해외든 어디든',city:'오사카',
-        arrL:'도착 · 현지 시간',arrD:'7/12 (토)',arrT:'09:30',timeUnknown:'시간 미정',
-        depL:'떠나는 날 · 현지 시간',depD:'7/14 (월)',depT:'18:00',
-        prev:'7/12 (토) → 7/14 (월) · 2박 3일',
-        flL:'편명 (선택)',out:'가는 편',ret:'오는 편',cta:'여행 시작'}},
-      {cap:'떠나기 전, <span class="hl">가방까지</span> 챙겨줘요',screen:'packing',d:{
-        kicker:'오사카 · 2박 3일 준비물',voice:'12개 중 5개 챙겼어요.',
-        groups:[
-          {cat:'필수',items:[{label:'여권',on:true},{label:'지갑 · 카드',on:true},{label:'숙소·항공 예약 확인'},{label:'보조배터리',on:true}]},
-          {cat:'의류',items:[{label:'속옷 · 양말',on:true},{label:'편한 신발'},{label:'상의 3벌'}]},
-          {cat:'위생',items:[{label:'칫솔 · 치약',on:true},{label:'스킨케어 미니'}]}
-        ],regen:'목록 다시 만들기'}},
-      {cap:'다녀온 하루가 <span class="hl">사진과 함께</span> 남아요',screen:'record',d:{
-        kicker:'오사카 · 2박 3일',dates:'7/12 (토) → 7/14 (월)',
-        chips:[{d:'1일차',date:'7/12 (토)',on:true},{d:'2일차',date:'7/13 (일)'},{d:'3일차',date:'7/14 (월)'}],
-        voice:'혼자라서 좋았던 하루.',
-        items:[
-          {time:'11:00',kind:'soft',title:'도톤보리',photo:true},
-          {time:'13:00',kind:'anchor',icon:'lock',title:'이치란 라멘',sub:'혼밥 카운터 · 최고였음'},
-          {time:'16:00',kind:'soft',title:'호리에 카페 골목'},
-          {time:'—',kind:'gap',text:'빈 시간 2시간 · 비어 있던 시간'}
-        ]}}
-    ]
-  },
-  en:{
-    sub:"App Store screenshots · preview",
-    note:"These reproduce the real screens straight from the code — same colors, fonts, layout. Use the <b>한국어 / English</b> toggle above to check each language is fully separated. High-res export for upload (1290×2796) comes after you approve.",
-    shots:[
-      {cap:'The moment you land,<br>your <span class="hl">day begins</span>',screen:'home',d:{
-        tag:'Osaka · Solo · Day 2',todayMark:' · Today',
-        chips:[{d:'Day 1',date:'7/12 (Sat)'},{d:'Day 2',date:'7/13 (Sun)',on:true,today:true},{d:'Day 3',date:'7/14 (Mon)'}],
-        voice:'An easy day for wandering. Linger wherever a lane feels right.',
-        replan:'Day slipped? Re-plan',
-        items:[
-          {time:'09:30',kind:'anchor',icon:'plane',title:'Arrive in Osaka',badge:'Fixed'},
-          {time:'11:00',kind:'soft',title:'Morning walk in Dotonbori',sub:'Quiet before the crowds'},
-          {time:'13:00',kind:'soft',title:'Ichiran Ramen · solo counter'},
-          {time:'15:00',kind:'gap',dur:'2 hours free',reason:'The afternoon is open · Fill it now?',sTitle:'Rest at a nearby café · 5 min walk',sMeta:'Good seat for one',fill:'Add to plan',other:'Another'},
-          {time:'18:30',kind:'soft',title:'Umeda Sky night view'}
-        ],add:'Add your own'}},
-      {cap:'2h40m until your train—<br><span class="hl">here\'s what\'s nearby</span>',screen:'home',d:{
-        tag:'Osaka · Solo · Day 3',todayMark:' · Today',
-        chips:[{d:'Day 1',date:'7/12 (Sat)'},{d:'Day 2',date:'7/13 (Sun)'},{d:'Day 3',date:'7/14 (Mon)',on:true,today:true}],
-        voice:'Last day. No need to rush.',
-        replan:'Day slipped? Re-plan',
-        items:[
-          {time:'10:30',kind:'soft',title:'Nakanoshima riverside walk'},
-          {time:'12:00',kind:'gap',dur:'2h 40m free',reason:'2h40m until your train · Fill it now?',sTitle:'Kuromon Market bites · 8 min walk',sMeta:'A light loop, easy solo',fill:'Add to plan',other:'Another'},
-          {time:'15:40',kind:'anchor',icon:'train',title:'Haruka to Kansai Airport',badge:'Fixed'}
-        ],add:'Add your own'}},
-      {cap:'Just tell it <span class="hl">when you land</span>',screen:'setup',d:{
-        lang:'en',kicker:'A trip on your own',voice:"Where to, and when? I'll plan the rest with you.",
-        cityL:'City',cityH:'anywhere — home or abroad',city:'Osaka',
-        arrL:'Arrival · local time',arrD:'7/12 (Sat)',arrT:'09:30',timeUnknown:'Time TBD',
-        depL:'Departure · local time',depD:'7/14 (Mon)',depT:'18:00',
-        prev:'7/12 (Sat) → 7/14 (Mon) · 2 nights',
-        flL:'Flight no. (optional)',out:'Outbound',ret:'Return',cta:'Start trip'}},
-      {cap:'It <span class="hl">packs your bag</span> before you go',screen:'packing',d:{
-        kicker:'Osaka · 2 nights packing',voice:'5 of 12 packed.',
-        groups:[
-          {cat:'Essentials',items:[{label:'Passport',on:true},{label:'Wallet · cards',on:true},{label:'Booking confirmations'},{label:'Power bank',on:true}]},
-          {cat:'Clothes',items:[{label:'Underwear · socks',on:true},{label:'Comfortable shoes'},{label:'3 tops'}]},
-          {cat:'Toiletries',items:[{label:'Toothbrush · paste',on:true},{label:'Mini skincare'}]}
-        ],regen:'Rebuild the list'}},
-      {cap:'Each day stays, <span class="hl">with your photos</span>',screen:'record',d:{
-        kicker:'Osaka · 2 nights',dates:'7/12 (Sat) → 7/14 (Mon)',
-        chips:[{d:'Day 1',date:'7/12 (Sat)',on:true},{d:'Day 2',date:'7/13 (Sun)'},{d:'Day 3',date:'7/14 (Mon)'}],
-        voice:'A day that was good to spend alone.',
-        items:[
-          {time:'11:00',kind:'soft',title:'Dotonbori',photo:true},
-          {time:'13:00',kind:'anchor',icon:'lock',title:'Ichiran Ramen',sub:'Solo counter · so good'},
-          {time:'16:00',kind:'soft',title:'Horie café lane'},
-          {time:'—',kind:'gap',text:'2 hours free · was free time'}
-        ]}}
-    ]
+    document.querySelectorAll('.langtog button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-l')===lang);});
   }
-};
-
-var lang='ko';
-function render(){
-  var D=DATA[lang];
-  document.getElementById('subttl').textContent=D.sub;
-  document.getElementById('note').innerHTML=D.note;
-  document.documentElement.lang=lang;
-  var strip=document.getElementById('strip');
-  strip.innerHTML=D.shots.map(function(s,i){
-    return '<div class="shot"><div class="idx">'+String(i+1).padStart(2,'0')+' / 05</div>'
-      +'<div class="cap">'+s.cap+'</div>'
-      +'<div class="phone"><div class="screen">'+REND[s.screen](s.d)+'</div></div></div>';
-  }).join('');
-  var b=document.querySelectorAll('.langtog button');
-  b.forEach(function(x){x.classList.toggle('on',x.getAttribute('data-l')===lang);});
-}
-document.querySelectorAll('.langtog button').forEach(function(x){
-  x.addEventListener('click',function(){lang=x.getAttribute('data-l');render();});
-});
-render();
+  document.querySelectorAll('.langtog button').forEach(function(b){
+    b.addEventListener('click',function(){lang=b.getAttribute('data-l');render();});
+  });
+  render();
 </script>
+</body></html>
